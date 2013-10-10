@@ -1,8 +1,10 @@
 package com.putasticker;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 
 public class StickerListActivity extends Activity {
 
@@ -17,6 +19,12 @@ public class StickerListActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.sticker_list, menu);
 		return true;
+	}
+	
+	public void activateSticker(View view)
+	{
+		Intent intent = new Intent(this,StickActivity.class);
+		startActivity(intent);
 	}
 
 }

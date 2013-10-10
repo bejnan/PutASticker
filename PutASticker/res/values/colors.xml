@@ -3,4 +3,5 @@
         <color name="background">#708090</color>
         <color name="NoteBackround">#EE9A49</color>
         <color name="TextBackground">#EBC79E</color>
+        <color name="NewStickerBackground">#F0F8FF</color>
     </resources>
