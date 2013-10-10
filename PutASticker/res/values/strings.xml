@@ -6,5 +6,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="SaveButton">Save it</string>
     <string name="close_desc">Close sticker</string>
+    <string name="title_activity_save_stick">SaveStickActivity</string>
+    <string name="title_activity_sticker_list">StickerListActivity</string>
 
 </resources>

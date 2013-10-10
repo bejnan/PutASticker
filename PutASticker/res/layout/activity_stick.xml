@@ -35,7 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:text="@string/SaveButton" />
+            android:text="@string/SaveButton"
+            android:onClick="saveSticker" />
     </LinearLayout>
 
     <ImageButton
@@ -45,6 +46,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:src="@drawable/ic_close"
-        android:contentDescription="@string/close_desc" />
+        android:contentDescription="@string/close_desc" 
+        android:onClick="closeSticker"/>
 
 </RelativeLayout>
