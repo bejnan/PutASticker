@@ -4,5 +4,7 @@
     <string name="app_name">PutASticker</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="SaveButton">Save it</string>
+    <string name="close_desc">Close sticker</string>
 
 </resources>
