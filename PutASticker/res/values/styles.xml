@@ -16,7 +16,7 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-    <style name="TextStyle">
+    <style name="SaveTextStyle">
         	<item name="android:layout_width">match_parent</item>
             <item name="android:layout_height">wrap_content</item>
             <item name="android:layout_marginTop">25dp</item>
@@ -25,6 +25,17 @@
             <item name="android:layout_marginBottom">15dp</item>
             <item name="android:ems">12</item>
             <item name="android:background">@color/TextBackground</item>
+    </style>
+    
+    <style name="DecideTextStyle">
+        	<item name="android:layout_width">match_parent</item>
+            <item name="android:layout_height">wrap_content</item>
+            <item name="android:layout_marginTop">25dp</item>
+            <item name="android:layout_marginLeft">15dp</item>
+            <item name="android:layout_marginRight">15dp</item>
+            <item name="android:layout_marginBottom">15dp</item>
+            <item name="android:ems">12</item>
+            <item name="android:background">@color/SavedTextBackground</item>
     </style>
 
 </resources>

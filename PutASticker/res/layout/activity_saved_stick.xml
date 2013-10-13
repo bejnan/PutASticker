@@ -1,4 +1,3 @@
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,7 +7,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@color/background"
-    tools:context=".StickerListActivity" >
+    tools:context=".StickActivity" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,26 +18,26 @@
 
         <EditText
             android:id="@+id/editSubject"
-            style="@style/SaveTextStyle" >
+            style="@style/DecideTextStyle" >
 
             <requestFocus />
         </EditText>
 
         <EditText
             android:id="@+id/editText"
-            style="@style/SaveTextStyle"
+            style="@style/DecideTextStyle"
             android:inputType="textMultiLine"
             android:lines="10" />
 
         <Button
-            android:id="@+id/saveButton"
+            android:id="@+id/decideButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
+            android:text="@string/DecideButton"
             android:background="#66CDAA"
-            android:text="@string/SaveButton"
-            android:onClick="saveSticker" />
+            />
     </LinearLayout>
 
     <ImageButton

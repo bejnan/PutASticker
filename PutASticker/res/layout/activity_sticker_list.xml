@@ -10,23 +10,32 @@
     tools:context=".SavedStickActivity" >
 
     <FrameLayout
+        android:id="@+id/frameLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="25dp"
-        android:background="@color/NewStickerBackground" 
-        android:onClick="activateSticker">
+        android:background="@color/NewStickerBackground"
+        android:onClick="activateSticker" >
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/newSticker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:text="@string/new_sticker_text"
             android:textColor="@color/background" />
-
     </FrameLayout>
+
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/frameLayout1" >
+
+    </ListView>
 
 </RelativeLayout>
