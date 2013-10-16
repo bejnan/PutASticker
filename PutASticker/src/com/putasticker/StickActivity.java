@@ -40,6 +40,7 @@ public class StickActivity extends Activity {
 		newUri = getContentResolver().insert(Sticker.CONTENT_URI, newValues);
 		
 		Intent intent = new Intent(this,SavedStickActivity.class);
+		intent.putExtra(Sticker.ID,newUri.getLastPathSegment());
 		startActivity(intent);
 	}
 	

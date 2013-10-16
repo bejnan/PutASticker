@@ -105,7 +105,7 @@ public class StickerContentProvider extends ContentProvider {
 			newValues = new ContentValues();
 
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
-		long rowId = db.insert(DB_NAME, Sticker.TEXT, newValues);
+		long rowId = db.insert(StickerTableName, Sticker.TEXT, newValues);
 
 		if (rowId == 0) {
 			throw new SQLException("Failed to insert row into " + DB_NAME);

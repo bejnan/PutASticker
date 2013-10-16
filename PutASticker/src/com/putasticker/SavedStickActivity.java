@@ -1,16 +1,20 @@
 package com.putasticker;
 
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+
+import com.putasticker.providers.Sticker;
 
 public class SavedStickActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Intent intent = getIntent();
+		int id = intent.getIntExtra(Sticker.ID, 0);
 		setContentView(R.layout.activity_saved_stick);
 	}
 
