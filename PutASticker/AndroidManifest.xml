@@ -30,6 +30,10 @@
             android:name="com.putasticker.StickerListActivity"
             android:label="@string/title_activity_sticker_list" >
         </activity>
+
+        <provider
+            android:name="com.putasticker.providers.StickerContentProvider"
+            android:authorities="com.putasticker.providers" />
     </application>
 
 </manifest>

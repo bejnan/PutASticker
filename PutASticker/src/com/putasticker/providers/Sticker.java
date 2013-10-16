@@ -4,10 +4,7 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 
 public class Sticker implements BaseColumns{
-	private int id;
-	private String subject;
-	private String text;
-	
+		
 	public static final Uri CONTENT_URI = Uri.parse("content://"
             + StickerContentProvider.Authority + "/sticker");
 	public static final String CONTENT_TYPE = "com.putasticker.providers.sticker";

@@ -15,7 +15,7 @@ import android.util.Log;
 
 public class StickerContentProvider extends ContentProvider {
 
-	public static final String Authority = "com.putasticker.providers.StickerContentProvider";
+	public static final String Authority = "com.putasticker.providers.stickercontentprovider";
 
 	private static final String TAG = "StickerContentProvider";
 
@@ -23,7 +23,7 @@ public class StickerContentProvider extends ContentProvider {
 
 	private static final int DB_VERSION = 1;
 
-	private static final String StickerTableName = "stickers";
+	private static final String StickerTableName = "sticker";
 
 	private static final UriMatcher stickerUriMatcher;
 
@@ -31,7 +31,7 @@ public class StickerContentProvider extends ContentProvider {
 	private static final int STICKERS_ID = 2;
 
 	private static class DBHelper extends SQLiteOpenHelper {
-		private static final String CreateQuery = "CREATE TABLE " + DB_NAME
+		private static final String CreateQuery = "CREATE TABLE " + StickerTableName
 				+ "(" + Sticker.ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
 				+ Sticker.SUBJECT + " VARCHAR(255)," + Sticker.TEXT
 				+ " LONGTEXT" + " );";
@@ -61,10 +61,9 @@ public class StickerContentProvider extends ContentProvider {
 
 	static {
 		stickerUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-		stickerUriMatcher.addURI(Authority, DB_NAME, STICKERS);
-		stickerUriMatcher.addURI(Authority, DB_NAME + "/#", STICKERS_ID);
+		stickerUriMatcher.addURI(Authority, StickerTableName, STICKERS);
+		stickerUriMatcher.addURI(Authority, StickerTableName + "/#", STICKERS_ID);
 	}
-
 	@Override
 	public int delete(Uri uri, String selection, String[] selectionArgs) {
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
