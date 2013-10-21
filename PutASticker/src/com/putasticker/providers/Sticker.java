@@ -7,11 +7,11 @@ import android.provider.BaseColumns;
 
 public class Sticker implements BaseColumns {
 
-	private int id;
+	private long id;
 	private String subject;
 	private String text;
 
-	public Sticker(int id, ContentResolver cr) {
+	public Sticker(long id, ContentResolver cr) {
 		super();
 		if (id > 0) {
 			Cursor c = cr.query(CONTENT_URI, projection, ID + " = " + id, null,
@@ -33,7 +33,7 @@ public class Sticker implements BaseColumns {
 		}
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 

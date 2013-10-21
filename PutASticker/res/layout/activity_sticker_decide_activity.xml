@@ -18,6 +18,7 @@
     
     
     <TextView
+        android:id="@+id/stickerDecideSubject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/new_sticker_text" />
@@ -39,6 +40,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/mail" 
             android:contentDescription="@string/mail"
+            android:onClick="messageShare"
             android:layout_gravity="left"/>
 
         
@@ -49,7 +51,8 @@
             android:layout_height="wrap_content"
             android:src="@drawable/trash" 
             android:contentDescription="@string/trash"
-            android:layout_gravity="bottom" />
+            android:layout_gravity="bottom"
+            android:onClick="deleteMessage" />
 </LinearLayout>
 
 <ImageButton

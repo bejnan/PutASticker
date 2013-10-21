@@ -10,7 +10,8 @@ import android.widget.EditText;
 import com.putasticker.providers.Sticker;
 
 public class SavedStickActivity extends Activity {
-
+	
+	private Sticker sticker;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -18,11 +19,11 @@ public class SavedStickActivity extends Activity {
 		
 		Intent intent = getIntent();
 		int id = Integer.parseInt(intent.getStringExtra(Sticker.ID));
-		Sticker s = new Sticker(id, getContentResolver());
+		sticker = new Sticker(id, getContentResolver());
 		EditText editSubject = (EditText) findViewById(R.id.editSubject);
-		editSubject.setText(s.getSubject());
+		editSubject.setText(sticker.getSubject());
 		EditText editText = (EditText) findViewById(R.id.editText);
-		editText.setText(s.getText());
+		editText.setText(sticker.getText());
 	}
 
 	@Override
@@ -41,6 +42,7 @@ public class SavedStickActivity extends Activity {
 	public void decide(View view)
 	{
 		Intent intent = new Intent(this,StickerDecideActivity.class);
+		intent.putExtra(Sticker.ID,Long.toString(sticker.getId()));
 		startActivity(intent);
 	}
 

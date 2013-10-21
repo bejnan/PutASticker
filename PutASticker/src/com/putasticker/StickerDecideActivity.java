@@ -1,17 +1,34 @@
 package com.putasticker;
 
-import android.os.Bundle;
+import java.util.List;
+
+import com.putasticker.providers.Sticker;
+
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.TextView;
 
 public class StickerDecideActivity extends Activity {
 
+	private TextView subject;
+	private Sticker sticker;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sticker_decide_activity);
+		
+		Intent intent = getIntent();
+		long id = Long.parseLong(intent.getStringExtra(Sticker.ID));
+		sticker = new Sticker(id, getContentResolver());
+		subject = (TextView) findViewById(R.id.stickerDecideSubject);
+		subject.setText(sticker.getSubject());
 	}
 
 	@Override
@@ -23,8 +40,7 @@ public class StickerDecideActivity extends Activity {
 	
 	public void closeSticker(View view)
 	{
-		Intent intent = new Intent(this,StickerListActivity.class);
-		startActivity(intent);
+		finish();
 	}
 	
 	public void facebookShare(View view)
@@ -32,7 +48,32 @@ public class StickerDecideActivity extends Activity {
 		Intent shareIntent = new Intent(Intent.ACTION_SEND);
 		shareIntent.setType("text/plain");
 		shareIntent.putExtra(Intent.EXTRA_TEXT, "URLyouWantToShare");
-		startActivity(Intent.createChooser(shareIntent, "Share..."));
+		PackageManager pm = view.getContext().getPackageManager();
+		List<ResolveInfo> activityList = pm.queryIntentActivities(shareIntent, 0);
+		for (final ResolveInfo app : activityList) {
+		    if ((app.activityInfo.name).contains("facebook")) {
+		        final ActivityInfo activity = app.activityInfo;
+		        final ComponentName name = new ComponentName(activity.applicationInfo.packageName, activity.name);
+		        shareIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+		        shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+		        shareIntent.setComponent(name);
+		        view.getContext().startActivity(shareIntent);
+		        break;
+		   }
+		}
+	}
+	
+	public void messageShare(View view)
+	{
+		Intent shareIntent = new Intent(Intent.ACTION_SEND);
+		shareIntent.setType("text/plain");
+		shareIntent.putExtra(Intent.EXTRA_TEXT, "TestText");
+		startActivity(shareIntent);
+	}
+	
+	public void deleteMessage(View view)
+	{
+		getContentResolver().delete(Sticker.CONTENT_URI, "_id=" + sticker.getId(), null);
 	}
 
 }
