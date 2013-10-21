@@ -34,6 +34,11 @@
         <provider
             android:name="com.putasticker.providers.StickerContentProvider"
             android:authorities="com.putasticker.providers.stickercontentprovider" />
+
+        <activity
+            android:name="com.putasticker.StickerDecideActivity"
+            android:label="@string/title_activity_sticker_decide_activity" >
+        </activity>
     </application>
 
 </manifest>

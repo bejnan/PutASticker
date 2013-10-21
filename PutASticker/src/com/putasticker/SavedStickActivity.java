@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.EditText;
 
 import com.putasticker.providers.Sticker;
 
@@ -13,9 +14,15 @@ public class SavedStickActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Intent intent = getIntent();
-		int id = intent.getIntExtra(Sticker.ID, 0);
 		setContentView(R.layout.activity_saved_stick);
+		
+		Intent intent = getIntent();
+		int id = Integer.parseInt(intent.getStringExtra(Sticker.ID));
+		Sticker s = new Sticker(id, getContentResolver());
+		EditText editSubject = (EditText) findViewById(R.id.editSubject);
+		editSubject.setText(s.getSubject());
+		EditText editText = (EditText) findViewById(R.id.editText);
+		editText.setText(s.getText());
 	}
 
 	@Override
@@ -28,6 +35,12 @@ public class SavedStickActivity extends Activity {
 	public void closeSticker(View view)
 	{
 		Intent intent = new Intent(this,StickerListActivity.class);
+		startActivity(intent);
+	}
+	
+	public void decide(View view)
+	{
+		Intent intent = new Intent(this,StickerDecideActivity.class);
 		startActivity(intent);
 	}
 

@@ -10,5 +10,9 @@
     <string name="title_activity_sticker_list">StickerListActivity</string>
     <string name="new_sticker_text">Tap to put a new sticker...</string>
     <string name="DecideButton">Decide now</string>
+    <string name="title_activity_sticker_decide_activity">StickerDecideActivity</string>
+    <string name="facebook">facebook</string>
+    <string name="mail">mail</string>
+    <string name="trash">trash</string>
 
 </resources>
