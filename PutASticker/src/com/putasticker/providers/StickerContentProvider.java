@@ -43,7 +43,6 @@ public class StickerContentProvider extends ContentProvider {
 		@Override
 		public void onCreate(SQLiteDatabase db) {
 			db.execSQL(CreateQuery);
-
 		}
 
 		@Override
@@ -52,7 +51,6 @@ public class StickerContentProvider extends ContentProvider {
 					+ newVersion + ". All data will be destroyed.");
 			db.execSQL("DROP TABLE IF EXISTS " + StickerTableName);
 			onCreate(db);
-
 		}
 
 	}
@@ -161,7 +159,6 @@ public class StickerContentProvider extends ContentProvider {
 				selectionArgs);
 		getContext().getContentResolver().notifyChange(uri, null);
 		return count;
-
 	}
 
 }
