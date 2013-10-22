@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 public class StickerDecideActivity extends Activity {
 
+	final int DELETE_REQUEST = 1;
 	private TextView subject;
 	private Sticker sticker;
 	@Override
@@ -74,6 +75,15 @@ public class StickerDecideActivity extends Activity {
 	public void deleteMessage(View view)
 	{
 		getContentResolver().delete(Sticker.CONTENT_URI, "_id=" + sticker.getId(), null);
+		Intent congratulations = new Intent(this,CongratulationActivity.class);
+		startActivityForResult(congratulations, DELETE_REQUEST);
+		//TODO how for result?
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		
 	}
 
 }

@@ -15,5 +15,9 @@
     <string name="mail">mail</string>
     <string name="trash">trash</string>
     <string name="title_activity_congratulation">CongratulationActivity</string>
+    <string name="congratulations">Congratulations!!!</string>
+    <string name="decision">You have made a decision!</string>
+    <string name="passed">and passed further your super idea:</string>
+    <string name="back">Go back to sticker</string>
 
 </resources>

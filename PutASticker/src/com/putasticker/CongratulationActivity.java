@@ -1,8 +1,10 @@
 package com.putasticker;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.widget.TextView;
 
 public class CongratulationActivity extends Activity {
 
@@ -16,7 +18,14 @@ public class CongratulationActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.congratulation, menu);
+		TextView tv = (TextView) findViewById(R.id.stickerSubject);
+		tv.setText("Tytuł stickera");
 		return true;
+	}
+	
+	public void closeMessage(View view)
+	{
+		finish();
 	}
 
 }
