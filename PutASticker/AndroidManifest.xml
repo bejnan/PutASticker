@@ -39,6 +39,10 @@
             android:name="com.putasticker.StickerDecideActivity"
             android:label="@string/title_activity_sticker_decide_activity" >
         </activity>
+        <activity
+            android:name="com.putasticker.CongratulationActivity"
+            android:label="@string/title_activity_congratulation" >
+        </activity>
     </application>
 
 </manifest>

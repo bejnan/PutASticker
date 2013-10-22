@@ -14,5 +14,6 @@
     <string name="facebook">facebook</string>
     <string name="mail">mail</string>
     <string name="trash">trash</string>
+    <string name="title_activity_congratulation">CongratulationActivity</string>
 
 </resources>
