@@ -10,20 +10,41 @@ import android.widget.EditText;
 import com.putasticker.providers.Sticker;
 
 public class SavedStickActivity extends Activity {
-	
+
 	private Sticker sticker;
+	private final int DECIDE = 1;
+	private EditText subject;
+	private EditText text;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_saved_stick);
-		
+
 		Intent intent = getIntent();
 		int id = Integer.parseInt(intent.getStringExtra(Sticker.ID));
 		sticker = new Sticker(id, getContentResolver());
-		EditText editSubject = (EditText) findViewById(R.id.editSubject);
-		editSubject.setText(sticker.getSubject());
-		EditText editText = (EditText) findViewById(R.id.editText);
-		editText.setText(sticker.getText());
+		subject = (EditText) findViewById(R.id.editSubject);
+		subject.setText(sticker.getSubject());
+		text = (EditText) findViewById(R.id.editText);
+		text.setText(sticker.getText());
+	}
+	
+	@Override
+	protected void onPause()
+	{
+		if (subject.getText().toString() != sticker.getSubject())
+		{
+			sticker.setSubject(subject.getText().toString());
+		}
+		if (subject.getText().toString() != sticker.getText())
+		{
+			sticker.setText(text.getText().toString()); 
+		}
+		if (sticker.hasChanged())
+		{
+			sticker.save();
+		}
+		super.onPause();
 	}
 
 	@Override
@@ -32,18 +53,29 @@ public class SavedStickActivity extends Activity {
 		getMenuInflater().inflate(R.menu.save_stick, menu);
 		return true;
 	}
-	
-	public void closeSticker(View view)
-	{
-		Intent intent = new Intent(this,StickerListActivity.class);
-		startActivity(intent);
+
+	public void closeSticker(View view) {
+		if (!StickerListActivity.isRunning) {
+			Intent intent = new Intent(this, StickerListActivity.class);
+			startActivity(intent);
+		} else {
+			finish();
+		}
+	}
+
+	public void decide(View view) {
+		Intent intent = new Intent(this, StickerDecideActivity.class);
+		intent.putExtra(Sticker.ID, Long.toString(sticker.getId()));
+		startActivityForResult(intent, DECIDE);
 	}
 	
-	public void decide(View view)
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
-		Intent intent = new Intent(this,StickerDecideActivity.class);
-		intent.putExtra(Sticker.ID,Long.toString(sticker.getId()));
-		startActivity(intent);
+		if (resultCode == RESULT_OK)
+			finish();
 	}
+	
+	
 
 }

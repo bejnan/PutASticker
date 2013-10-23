@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,6 +17,7 @@ import android.widget.SimpleCursorAdapter;
 import com.putasticker.providers.Sticker;
 
 public class StickerListActivity extends Activity {
+	public static boolean isRunning = false;
 	private ListView lview;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +46,16 @@ public class StickerListActivity extends Activity {
 			}
 			
 		});
+		isRunning= true;
 	}
 
+	@Override
+	public void onDestroy()
+	{
+		super.onDestroy();
+		isRunning = false;
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
