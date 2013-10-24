@@ -25,29 +25,31 @@ public class StickActivity extends Activity {
 		getMenuInflater().inflate(R.menu.stick, menu);
 		return true;
 	}
-	
-	public void saveSticker(View view)
-	{
+
+	public void saveSticker(View view) {
 		Uri newUri;
 		ContentValues newValues = new ContentValues();
-		
+
 		EditText editSubject = (EditText) findViewById(R.id.editSubject);
-		newValues.put(Sticker.SUBJECT,editSubject.getText().toString());
-		
+		newValues.put(Sticker.SUBJECT, editSubject.getText().toString());
+
 		EditText editText = (EditText) findViewById(R.id.editText);
-		newValues.put(Sticker.TEXT,editText.getText().toString());
-		
+		newValues.put(Sticker.TEXT, editText.getText().toString());
+
 		newUri = getContentResolver().insert(Sticker.CONTENT_URI, newValues);
-		
-		Intent intent = new Intent(this,SavedStickActivity.class);
-		intent.putExtra(Sticker.ID,newUri.getLastPathSegment());
+
+		Intent intent = new Intent(this, SavedStickActivity.class);
+		intent.putExtra(Sticker.ID, newUri.getLastPathSegment());
 		startActivity(intent);
 	}
-	
-	public void closeSticker(View view)
-	{
-		Intent intent = new Intent(this,StickerListActivity.class);
-		startActivity(intent);
+
+	public void closeSticker(View view) {
+		if (StickerListActivity.isRunning)
+			finish();
+		else {
+			Intent intent = new Intent(this, StickerListActivity.class);
+			startActivity(intent);
+		}
 	}
 
 }

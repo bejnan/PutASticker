@@ -76,6 +76,4 @@ public class SavedStickActivity extends Activity {
 			finish();
 	}
 	
-	
-
 }

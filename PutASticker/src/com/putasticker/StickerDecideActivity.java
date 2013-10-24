@@ -49,7 +49,7 @@ public class StickerDecideActivity extends Activity {
 	{
 		Intent shareIntent = new Intent(Intent.ACTION_SEND);
 		shareIntent.setType("text/plain");
-		shareIntent.putExtra(Intent.EXTRA_TEXT, "URLyouWantToShare");
+		shareIntent.putExtra(Intent.EXTRA_TEXT, sticker.getText());
 		PackageManager pm = view.getContext().getPackageManager();
 		List<ResolveInfo> activityList = pm.queryIntentActivities(shareIntent, 0);
 		for (final ResolveInfo app : activityList) {
@@ -69,7 +69,7 @@ public class StickerDecideActivity extends Activity {
 	{
 		Intent shareIntent = new Intent(Intent.ACTION_SEND);
 		shareIntent.setType("text/plain");
-		shareIntent.putExtra(Intent.EXTRA_TEXT, "TestText");
+		shareIntent.putExtra(Intent.EXTRA_TEXT, sticker.getText());
 		startActivity(shareIntent);
 		setResult(RESULT_OK);
 		finish();
