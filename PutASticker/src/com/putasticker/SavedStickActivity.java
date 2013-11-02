@@ -1,6 +1,8 @@
 package com.putasticker;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -74,6 +76,11 @@ public class SavedStickActivity extends Activity {
 	{
 		if (resultCode == RESULT_OK)
 			finish();
+	}
+	
+	private void setNotificationAlarm()
+	{
+		//TODO (IT IS NOT SO EASY)
 	}
 	
 }

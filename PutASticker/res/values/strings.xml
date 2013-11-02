@@ -19,5 +19,6 @@
     <string name="decision">You have made a decision!</string>
     <string name="passed">and passed further your super idea:</string>
     <string name="back">Go back to sticker</string>
+    <string name="title_activity_push">PushActivity</string>
 
 </resources>

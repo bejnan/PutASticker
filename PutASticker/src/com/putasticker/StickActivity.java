@@ -27,19 +27,15 @@ public class StickActivity extends Activity {
 	}
 
 	public void saveSticker(View view) {
-		Uri newUri;
-		ContentValues newValues = new ContentValues();
-
+		
 		EditText editSubject = (EditText) findViewById(R.id.editSubject);
-		newValues.put(Sticker.SUBJECT, editSubject.getText().toString());
-
 		EditText editText = (EditText) findViewById(R.id.editText);
-		newValues.put(Sticker.TEXT, editText.getText().toString());
-
-		newUri = getContentResolver().insert(Sticker.CONTENT_URI, newValues);
-
+		String subject = editSubject.getText().toString();
+		String text = editText.getText().toString();
+		
+		int stickerId = Sticker.createStricker(subject, text, getContentResolver(), this);
 		Intent intent = new Intent(this, SavedStickActivity.class);
-		intent.putExtra(Sticker.ID, newUri.getLastPathSegment());
+		intent.putExtra(Sticker.ID, Integer.toString(stickerId));
 		startActivity(intent);
 	}
 
