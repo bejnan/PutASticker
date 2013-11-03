@@ -52,7 +52,8 @@ public class Sticker implements BaseColumns {
 		        new NotificationCompat.Builder(context)
 		        .setSmallIcon(R.drawable.ic_launcher)
 		        .setContentTitle(subject)
-		        .setContentText(text);
+		        .setContentText(text)
+		        .setWhen(Sticker.NotificationTime);
 		// Creates an explicit intent for an Activity in your app
 		Intent resultIntent = new Intent(context, SavedStickActivity.class);
 		resultIntent.putExtra(Sticker.ID, Integer.toString(id));

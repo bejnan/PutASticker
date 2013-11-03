@@ -37,6 +37,7 @@ public class StickActivity extends Activity {
 		Intent intent = new Intent(this, SavedStickActivity.class);
 		intent.putExtra(Sticker.ID, Integer.toString(stickerId));
 		startActivity(intent);
+		finish();
 	}
 
 	public void closeSticker(View view) {
