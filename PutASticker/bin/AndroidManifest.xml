@@ -7,6 +7,11 @@
     <uses-sdk
         android:minSdkVersion="16"
         android:targetSdkVersion="18" />
+    
+    <uses-permission android:name="android.permission.WAKE_LOCK"></uses-permission>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
+    
 
     <application
         android:allowBackup="true"
@@ -47,6 +52,16 @@
             android:name="com.putasticker.PushActivity"
             android:label="@string/title_activity_push" >
         </activity>
+        
+        <receiver android:name="com.putasticker.sheduler.AlarmReceiver"></receiver>
+        
+        <receiver android:name="com.putasticker.sheduler.BootReceiver"
+                android:enabled="false">
+            <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+            </intent-filter>
+        </receiver>
+        <service android:name="com.putasticker.sheduler.StickerSchedulingService" />
     </application>
 
 </manifest>

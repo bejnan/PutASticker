@@ -19,6 +19,7 @@ import com.putasticker.providers.Sticker;
 public class StickerListActivity extends Activity {
 	public static boolean isRunning = false;
 	private ListView lview;
+	private Cursor cursor;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -28,11 +29,11 @@ public class StickerListActivity extends Activity {
 		Uri uri = Sticker.CONTENT_URI;
 		ContentResolver cr = getContentResolver();
 		
-		Cursor c = cr.query(uri, Sticker.projection, null, null, "_id ASC");
+		cursor = cr.query(uri, Sticker.projection, null, null, "_id ASC");
 		
 		String[] fromColumns = {Sticker.SUBJECT};
 		int[] toIds = {R.id.stickerSubject};
-		SimpleCursorAdapter sadapter = new SimpleCursorAdapter(this, R.layout.listview_layout, c, fromColumns, toIds);
+		SimpleCursorAdapter sadapter = new SimpleCursorAdapter(this, R.layout.listview_layout, cursor, fromColumns, toIds);
 		
 		lview.setAdapter(sadapter);
 		lview.setOnItemClickListener(new OnItemClickListener() {
@@ -54,6 +55,7 @@ public class StickerListActivity extends Activity {
 	{
 		super.onDestroy();
 		isRunning = false;
+		cursor.close();
 	}
 	
 	@Override

@@ -33,9 +33,9 @@ public class StickActivity extends Activity {
 		String subject = editSubject.getText().toString();
 		String text = editText.getText().toString();
 		
-		int stickerId = Sticker.createStricker(subject, text, getContentResolver(), this);
+		long stickerId = Sticker.createStricker(subject, text, getContentResolver(), this);
 		Intent intent = new Intent(this, SavedStickActivity.class);
-		intent.putExtra(Sticker.ID, Integer.toString(stickerId));
+		intent.putExtra(Sticker.ID, Long.toString(stickerId));
 		startActivity(intent);
 		finish();
 	}
@@ -48,5 +48,4 @@ public class StickActivity extends Activity {
 			startActivity(intent);
 		}
 	}
-
 }
