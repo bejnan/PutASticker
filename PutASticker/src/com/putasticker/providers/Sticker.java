@@ -3,6 +3,7 @@ package com.putasticker.providers;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.BaseColumns;
@@ -42,6 +43,13 @@ public class Sticker implements BaseColumns {
 		alarm.setAlarm(context,id);
 		
 		return id;
+	}
+	
+	public static Sticker getInstanceFromIntent(Intent intent, ContentResolver cr)
+	{
+		String textId = intent.getStringExtra(Sticker.ID);
+		long id = (textId == null) ? 0 : Long.parseLong(textId);
+		return new Sticker(id,cr);
 	}
 	
 	public Sticker(long id, ContentResolver cr) {
