@@ -1,5 +1,6 @@
 package com.putasticker.sheduler;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import com.putasticker.providers.Sticker;
@@ -11,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v4.content.WakefulBroadcastReceiver;
+import android.util.Log;
 
 /**
  * When the alarm fires, this WakefulBroadcastReceiver receives the broadcast
@@ -24,6 +26,8 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 	private AlarmManager alarmMgr;
 	// The pending intent that is triggered when the alarm fires.
 	private PendingIntent alarmIntent;
+
+	public static final long REPEAT_INTERVAL = AlarmManager.INTERVAL_DAY * 2;
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
@@ -42,12 +46,11 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 		intent.putExtra(Sticker.ID, Long.toString(id));
 		alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTimeInMillis(System.currentTimeMillis());
-		calendar.add(Calendar.MINUTE, 1);
-
-		alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP,
-				calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY,
+		
+				alarmMgr.setInexactRepeating( // To be punctual change to setReapeting
+				AlarmManager.RTC_WAKEUP, 
+				getAlarmTime(), 
+				AlarmReceiver.REPEAT_INTERVAL,
 				alarmIntent);
 
 		ComponentName receiver = new ComponentName(context, BootReceiver.class);
@@ -56,6 +59,18 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 		pm.setComponentEnabledSetting(receiver,
 				PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
 				PackageManager.DONT_KILL_APP);
+	}
+	
+	private long getAlarmTime()
+	{
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(System.currentTimeMillis());
+		calendar.add(Calendar.DAY_OF_YEAR, 1);
+		if (calendar.before(Calendar.getInstance())) {
+			calendar.add(Calendar.YEAR, 1);
+		}
+		return calendar.getTimeInMillis();
+
 	}
 
 	/**

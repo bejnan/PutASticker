@@ -47,10 +47,7 @@ public class StickerSchedulingService extends IntentService {
 			NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
 					this)
 					.setSmallIcon(R.drawable.ic_launcher)
-					.setContentTitle(getString(R.string.close_desc))
-					.setStyle(
-							new NotificationCompat.BigTextStyle().bigText(stick
-									.getSubject()))
+					.setContentTitle(stick.getSubject())
 					.setContentText(stick.getText());
 
 			mBuilder.setContentIntent(contentIntent);
