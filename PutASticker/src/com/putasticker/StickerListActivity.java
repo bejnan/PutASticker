@@ -24,6 +24,7 @@ public class StickerListActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sticker_list);
+		setTitle("Stickers list");
 		lview = (ListView) findViewById(R.id.stickerListView);
 		
 		Uri uri = Sticker.CONTENT_URI;

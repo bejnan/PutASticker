@@ -48,7 +48,8 @@ public class StickerSchedulingService extends IntentService {
 					this)
 					.setSmallIcon(R.drawable.ic_launcher)
 					.setContentTitle(stick.getSubject())
-					.setContentText(stick.getText());
+					.setContentText(stick.getText())
+					.setContentInfo(Long.toString(stick.getId()));
 
 			mBuilder.setContentIntent(contentIntent);
 			mNotificationManager.notify((int) stick.getId(), mBuilder.build());

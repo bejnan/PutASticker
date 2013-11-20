@@ -24,11 +24,14 @@ public class SavedStickActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_saved_stick);
 
-		sticker = Sticker.getInstanceFromIntent(getIntent(), getContentResolver());
+		sticker = Sticker.getInstanceFromIntent(getIntent(),
+				getContentResolver());
 		subject = (EditText) findViewById(R.id.editSubject);
 		subject.setText(sticker.getSubject());
 		text = (EditText) findViewById(R.id.editText);
 		text.setText(sticker.getText());
+		
+		setTitle("Sticker " + sticker.getId());
 	}
 
 	@Override
@@ -68,15 +71,17 @@ public class SavedStickActivity extends Activity {
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (resultCode == RESULT_OK) {
-			congratulate();
+		congratulate(resultCode);
+		if (resultCode == RESULT_FIRST_USER) {
 			finish();
 		}
 	}
 
-	private void congratulate() {
+	private void congratulate(int resultCode) {
 		Intent intent = new Intent(this, CongratulationActivity.class);
-		intent.putExtra(Sticker.ID, Long.toString(sticker.getId()));
+		intent.putExtra(Sticker.SUBJECT, sticker.getSubject());
+		intent.putExtra(StickerDecideActivity.RESULT,
+				Integer.toString(resultCode));
 		startActivity(intent);
 	}
 }

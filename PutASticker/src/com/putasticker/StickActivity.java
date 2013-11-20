@@ -17,6 +17,7 @@ public class StickActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_stick);
+		setTitle("Sticker");
 	}
 
 	@Override
@@ -41,11 +42,11 @@ public class StickActivity extends Activity {
 	}
 
 	public void closeSticker(View view) {
-		if (StickerListActivity.isRunning)
-			finish();
-		else {
+		if (!StickerListActivity.isRunning)
+		{
 			Intent intent = new Intent(this, StickerListActivity.class);
 			startActivity(intent);
 		}
+		finish();
 	}
 }

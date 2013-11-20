@@ -46,12 +46,10 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 		intent.putExtra(Sticker.ID, Long.toString(id));
 		alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 
-		
-				alarmMgr.setInexactRepeating( // To be punctual change to setReapeting
-				AlarmManager.RTC_WAKEUP, 
-				getAlarmTime(), 
-				AlarmReceiver.REPEAT_INTERVAL,
-				alarmIntent);
+		alarmMgr.setInexactRepeating(
+				// To be punctual change to setReapeting
+				AlarmManager.RTC_WAKEUP, getAlarmTime(),
+				AlarmReceiver.REPEAT_INTERVAL, alarmIntent);
 
 		ComponentName receiver = new ComponentName(context, BootReceiver.class);
 		PackageManager pm = context.getPackageManager();
@@ -60,17 +58,17 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 				PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
 				PackageManager.DONT_KILL_APP);
 	}
-	
-	private long getAlarmTime()
-	{
+
+	private long getAlarmTime() {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTimeInMillis(System.currentTimeMillis());
-		calendar.add(Calendar.DAY_OF_YEAR, 1);
-		if (calendar.before(Calendar.getInstance())) {
-			calendar.add(Calendar.YEAR, 1);
-		}
+		/*
+		 * calendar.add(Calendar.DAY_OF_YEAR, 1); if
+		 * (calendar.before(Calendar.getInstance())) {
+		 * calendar.add(Calendar.YEAR, 1); }
+		 */
+		calendar.add(Calendar.MINUTE, 1);
 		return calendar.getTimeInMillis();
-
 	}
 
 	/**
@@ -83,7 +81,6 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 		if (alarmMgr != null) {
 			alarmMgr.cancel(alarmIntent);
 		}
-
 		// Disable {@code SampleBootReceiver} so that it doesn't automatically
 		// restart the
 		// alarm when the device is rebooted.

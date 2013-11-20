@@ -18,8 +18,7 @@ import com.putasticker.providers.Sticker;
 
 public class StickerDecideActivity extends Activity {
 
-	final int DELETE_REQUEST = 1;
-	final int SEND_MESSAGE_REQUEST = 1;
+	public static final String RESULT = "result";
 	private TextView subject;
 	private Sticker sticker;
 
@@ -27,10 +26,8 @@ public class StickerDecideActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sticker_decide_activity);
-
-		Intent intent = getIntent();
-		long id = Long.parseLong(intent.getStringExtra(Sticker.ID));
-		sticker = new Sticker(id, getContentResolver());
+		setTitle("Share your Sticker!");
+		sticker = Sticker.getInstanceFromIntent(getIntent(), getContentResolver());
 		subject = (TextView) findViewById(R.id.stickerDecideSubject);
 		subject.setText(sticker.getSubject());
 	}
@@ -51,6 +48,8 @@ public class StickerDecideActivity extends Activity {
 		shareIntent.setType("text/plain");
 		shareIntent.putExtra(Intent.EXTRA_TEXT, sticker.getText());
 		shareByFacebook(shareIntent, view.getContext());
+		setResult(RESULT_OK);
+		finish();
 	}
 
 	private void shareByFacebook(Intent shareIntent, Context context) {
@@ -84,14 +83,7 @@ public class StickerDecideActivity extends Activity {
 	public void deleteMessage(View view) {
 		getContentResolver().delete(Sticker.CONTENT_URI,
 				"_id=" + sticker.getId(), null);
-		setResult(RESULT_OK);
-	}
-
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (resultCode == RESULT_OK) {
-			setResult(resultCode);
-			finish();
-		}
+		setResult(RESULT_FIRST_USER);
+		finish();
 	}
 }
