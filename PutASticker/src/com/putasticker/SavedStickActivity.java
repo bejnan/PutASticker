@@ -31,7 +31,7 @@ public class SavedStickActivity extends Activity {
 		text = (EditText) findViewById(R.id.editText);
 		text.setText(sticker.getText());
 		
-		setTitle("Sticker " + sticker.getId());
+		setTitle("Sticker");
 	}
 
 	@Override
