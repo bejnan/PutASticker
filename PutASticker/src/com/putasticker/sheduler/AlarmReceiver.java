@@ -1,9 +1,6 @@
 package com.putasticker.sheduler;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
-import com.putasticker.providers.Sticker;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -11,8 +8,11 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.support.v4.content.WakefulBroadcastReceiver;
 import android.util.Log;
+
+import com.putasticker.providers.Sticker;
 
 /**
  * When the alarm fires, this WakefulBroadcastReceiver receives the broadcast
@@ -21,19 +21,19 @@ import android.util.Log;
  */
 public class AlarmReceiver extends WakefulBroadcastReceiver {
 
-	// The app's AlarmManager, which provides access to the system alarm
-	// services.
 	private AlarmManager alarmMgr;
-	// The pending intent that is triggered when the alarm fires.
 	private PendingIntent alarmIntent;
 
 	public static final long REPEAT_INTERVAL = AlarmManager.INTERVAL_DAY * 2;
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		Intent service = new Intent(context, StickerSchedulingService.class);
-		String id = intent.getStringExtra(Sticker.ID);
+		Bundle extras = intent.getExtras();
+		String id = extras.getString(Sticker.ID);
+		Log.i(Sticker.CONTENT_TYPE, id);
+
 		if (id != null) {
+			Intent service = new Intent(context, StickerSchedulingService.class);
 			service.putExtra(Sticker.ID, id);
 			startWakefulService(context, service);
 		}
@@ -44,7 +44,8 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 				.getSystemService(Context.ALARM_SERVICE);
 		Intent intent = new Intent(context, AlarmReceiver.class);
 		intent.putExtra(Sticker.ID, Long.toString(id));
-		alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+		alarmIntent = PendingIntent.getBroadcast(context, (int) id, intent,
+				PendingIntent.FLAG_ONE_SHOT);
 
 		alarmMgr.setInexactRepeating(
 				// To be punctual change to setReapeting
@@ -62,12 +63,11 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 	private long getAlarmTime() {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTimeInMillis(System.currentTimeMillis());
-		/*
-		 * calendar.add(Calendar.DAY_OF_YEAR, 1); if
-		 * (calendar.before(Calendar.getInstance())) {
-		 * calendar.add(Calendar.YEAR, 1); }
-		 */
-		calendar.add(Calendar.MINUTE, 1);
+		calendar.add(Calendar.DAY_OF_YEAR, 3);
+		if (calendar.before(Calendar.getInstance())) {
+			calendar.add(Calendar.YEAR, 1);
+		}
+		// calendar.add(Calendar.MINUTE, 1);
 		return calendar.getTimeInMillis();
 	}
 
@@ -77,13 +77,9 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 	 * @param context
 	 */
 	public void cancelAlarm(Context context) {
-		// If the alarm has been set, cancel it.
 		if (alarmMgr != null) {
 			alarmMgr.cancel(alarmIntent);
 		}
-		// Disable {@code SampleBootReceiver} so that it doesn't automatically
-		// restart the
-		// alarm when the device is rebooted.
 		ComponentName receiver = new ComponentName(context, BootReceiver.class);
 		PackageManager pm = context.getPackageManager();
 

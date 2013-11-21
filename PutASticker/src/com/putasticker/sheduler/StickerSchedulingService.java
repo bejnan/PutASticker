@@ -24,12 +24,13 @@ public class StickerSchedulingService extends IntentService {
 	@Override
 	protected void onHandleIntent(Intent intent) {
 
-		Bundle extras = intent.getExtras();
-		long id = (extras.getString(Sticker.ID) != null) ? Long
-				.parseLong(intent.getStringExtra(Sticker.ID)) : 0; 
+		long id = (intent.getStringExtra(Sticker.ID) != null) ? Long
+				.parseLong(intent.getStringExtra(Sticker.ID)) : 0;
 		Log.i(Sticker.CONTENT_TYPE, Long.toString(id));
-		sendNotification(id);
-		AlarmReceiver.completeWakefulIntent(intent);
+		if (id > 0) {
+			sendNotification(id);
+			AlarmReceiver.completeWakefulIntent(intent);
+		}
 	}
 
 	private void sendNotification(long id) {
@@ -38,15 +39,14 @@ public class StickerSchedulingService extends IntentService {
 
 		Intent newIntent = new Intent(this, SavedStickActivity.class);
 		newIntent.putExtra(Sticker.ID, Long.toString(id));
-		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-				newIntent, 0);
+		PendingIntent contentIntent = PendingIntent.getActivity(this, (int)id,
+				newIntent, PendingIntent.FLAG_ONE_SHOT);
 
 		Sticker stick = new Sticker(id, getContentResolver());
 
 		if (stick.getId() > 0) {
 			NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
-					this)
-					.setSmallIcon(R.drawable.ic_launcher)
+					this).setSmallIcon(R.drawable.ic_launcher)
 					.setContentTitle(stick.getSubject())
 					.setContentText(stick.getText())
 					.setContentInfo(Long.toString(stick.getId()));
