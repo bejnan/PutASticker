@@ -76,6 +76,7 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 	 * 
 	 * @param context
 	 */
+	//TODO - develop to cancel alarm by ID
 	public void cancelAlarm(Context context) {
 		if (alarmMgr != null) {
 			alarmMgr.cancel(alarmIntent);

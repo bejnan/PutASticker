@@ -26,12 +26,17 @@ public class SavedStickActivity extends Activity {
 
 		sticker = Sticker.getInstanceFromIntent(getIntent(),
 				getContentResolver());
+		setView();
+	}
+	
+	private void setView()
+	{
+		setTitle("Sticker");
+		
 		subject = (EditText) findViewById(R.id.editSubject);
 		subject.setText(sticker.getSubject());
 		text = (EditText) findViewById(R.id.editText);
 		text.setText(sticker.getText());
-		
-		setTitle("Sticker");
 	}
 
 	@Override

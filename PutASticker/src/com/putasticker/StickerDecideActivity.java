@@ -26,8 +26,13 @@ public class StickerDecideActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sticker_decide_activity);
-		setTitle("Share your Sticker!");
 		sticker = Sticker.getInstanceFromIntent(getIntent(), getContentResolver());
+		setView();
+	}
+	
+	private void setView()
+	{
+		setTitle("Share your Sticker!");
 		subject = (TextView) findViewById(R.id.stickerDecideSubject);
 		subject.setText(sticker.getSubject());
 	}

@@ -126,7 +126,7 @@ public class StickerContentProvider extends ContentProvider {
 			String[] selectionArgs, String sortOrder) {
 		SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 		qb.setTables(StickerTableName);
-		// qb.setProjectionMap(columnMap);
+
 		switch (stickerUriMatcher.match(uri)) {
 		case STICKERS:
 			break;

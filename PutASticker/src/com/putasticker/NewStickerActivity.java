@@ -17,7 +17,7 @@ public class NewStickerActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_stick);
-		setTitle("Sticker");
+		setTitle("New sticker");
 	}
 
 	@Override
@@ -35,10 +35,15 @@ public class NewStickerActivity extends Activity {
 		String text = editText.getText().toString();
 		
 		long stickerId = Sticker.createStricker(subject, text, getContentResolver(), this);
+		changeViewToSavedSticker(stickerId);
+		finish();
+	}
+	
+	private void changeViewToSavedSticker(long stickerId)
+	{
 		Intent intent = new Intent(this, SavedStickActivity.class);
 		intent.putExtra(Sticker.ID, Long.toString(stickerId));
 		startActivity(intent);
-		finish();
 	}
 
 	public void closeSticker(View view) {

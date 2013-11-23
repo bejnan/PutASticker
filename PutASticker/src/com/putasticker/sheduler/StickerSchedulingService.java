@@ -5,7 +5,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -42,17 +43,24 @@ public class StickerSchedulingService extends IntentService {
 		PendingIntent contentIntent = PendingIntent.getActivity(this, (int)id,
 				newIntent, PendingIntent.FLAG_ONE_SHOT);
 
-		Sticker stick = new Sticker(id, getContentResolver());
-
-		if (stick.getId() > 0) {
-			NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
-					this).setSmallIcon(R.drawable.ic_launcher)
-					.setContentTitle(stick.getSubject())
-					.setContentText(stick.getText())
-					.setContentInfo(Long.toString(stick.getId()));
-
-			mBuilder.setContentIntent(contentIntent);
-			mNotificationManager.notify((int) stick.getId(), mBuilder.build());
+		Sticker sticker = new Sticker(id, getContentResolver());
+		
+		if (sticker.getId() > 0) {
+			NotificationCompat.Builder mBuilder = createNotification(sticker, contentIntent);
+			mNotificationManager.notify((int) sticker.getId(), mBuilder.build());
 		}
+	}
+	
+	private NotificationCompat.Builder createNotification(Sticker sticker, PendingIntent newIntent)
+	{
+		Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
+				this).setSmallIcon(R.drawable.ic_launcher)
+				.setContentTitle(sticker.getSubject())
+				.setContentText(sticker.getText())
+				.setContentInfo(Long.toString(sticker.getId()))
+				.setContentIntent(newIntent)
+				.setSound(alarmSound);
+		return mBuilder;
 	}
 }

@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
@@ -24,21 +25,23 @@ public class StickerListActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sticker_list);
+		isRunning= true;
+		setView();			
+	}
+	
+	private void setView()
+	{
 		setTitle("Stickers list");
+		setListView();
+	}
+	
+	private void setListView()
+	{
 		lview = (ListView) findViewById(R.id.stickerListView);
 		
-		Uri uri = Sticker.CONTENT_URI;
-		ContentResolver cr = getContentResolver();
-		
-		cursor = cr.query(uri, Sticker.projection, null, null, "_id ASC");
-		
-		String[] fromColumns = {Sticker.SUBJECT};
-		int[] toIds = {R.id.stickerSubject};
-		SimpleCursorAdapter sadapter = new SimpleCursorAdapter(this, R.layout.listview_layout, cursor, fromColumns, toIds);
-		
-		lview.setAdapter(sadapter);
+		CursorAdapter adapter = createCursorAdapter();
+		lview.setAdapter(adapter);
 		lview.setOnItemClickListener(new OnItemClickListener() {
-
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
@@ -48,7 +51,15 @@ public class StickerListActivity extends Activity {
 			}
 			
 		});
-		isRunning= true;
+
+	}
+	
+	private CursorAdapter createCursorAdapter()
+	{
+		cursor = Sticker.getStickerCursor(getContentResolver()); 
+		String[] fromColumns = {Sticker.SUBJECT};
+		int[] toIds = {R.id.stickerSubject};
+		return  new SimpleCursorAdapter(this, R.layout.listview_layout, cursor, fromColumns, toIds);
 	}
 
 	@Override

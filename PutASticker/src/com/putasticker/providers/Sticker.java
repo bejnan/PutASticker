@@ -52,12 +52,16 @@ public class Sticker implements BaseColumns {
 		return new Sticker(id,cr);
 	}
 	
+	public static Cursor getStickerCursor(ContentResolver cr)
+	{
+		return cr.query(Sticker.CONTENT_URI, Sticker.projection, null, null, "_id ASC");
+	}
+	
 	public Sticker(long id, ContentResolver cr) {
 		super();
 		resolver = cr;
 		if (id > 0) {
-			Cursor c = resolver.query(CONTENT_URI, projection, ID + " = " + id, null,
-					ID + " ASC");
+			Cursor c = Sticker.getStickerCursor(resolver);
 			if (c.moveToFirst()) {
 				subject = c.getString(c.getColumnIndex(SUBJECT));
 				text = c.getString(c.getColumnIndex(TEXT));
