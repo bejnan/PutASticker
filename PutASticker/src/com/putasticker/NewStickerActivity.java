@@ -11,7 +11,7 @@ import android.widget.EditText;
 
 import com.putasticker.providers.Sticker;
 
-public class StickActivity extends Activity {
+public class NewStickerActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

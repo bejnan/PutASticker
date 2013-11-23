@@ -67,7 +67,7 @@ public class StickerListActivity extends Activity {
 	}
 
 	public void activateSticker(View view) {
-		Intent intent = new Intent(this, StickActivity.class);
+		Intent intent = new Intent(this, NewStickerActivity.class);
 		startActivity(intent);
 	}
 
