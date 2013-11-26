@@ -76,16 +76,24 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 		return calendar.getTimeInMillis();
 	}
 
-	/**
-	 * Cancels the alarm.
-	 * 
-	 * @param context
-	 */
-	// TODO - develop to cancel alarm by ID
-	public void cancelAlarm(Context context) {
-		if (alarmMgr != null) {
-			alarmMgr.cancel(alarmIntent);
-		}
+	public void cancelAlarm(Context context, long id) {
+		PendingIntent reCreatedIntent = cancelPendingIntent(context, id);
+		if (reCreatedIntent != null)
+		alarmMgr.cancel(reCreatedIntent);
+		cancelAlarmRestoreOnBoot(context);
+	}
+	
+	private PendingIntent cancelPendingIntent(Context context, long id)
+	{
+		Intent intent = new Intent(context, AlarmReceiver.class);
+		PendingIntent recreatedIntend = PendingIntent.getBroadcast(context, (int) id, intent,
+				PendingIntent.FLAG_ONE_SHOT);
+		if (recreatedIntend != null) recreatedIntend.cancel();
+		return recreatedIntend;
+	}
+	
+	private void cancelAlarmRestoreOnBoot(Context context)
+	{
 		ComponentName receiver = new ComponentName(context, BootReceiver.class);
 		PackageManager pm = context.getPackageManager();
 

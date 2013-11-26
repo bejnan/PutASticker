@@ -129,4 +129,16 @@ public class Sticker implements BaseColumns {
 		cv.put(TEXT, text);
 		resolver.update(CONTENT_URI, cv, ID + " = " + id, null);
 	}
+	
+	public boolean isEmpty()
+	{
+		return  id == 0  || (subject == null && text == null);
+	}
+	
+	public void delete(Context context)
+	{
+		resolver.delete(Sticker.CONTENT_URI,
+				"_id=" + id, null);
+		alarm.cancelAlarm(context, id);
+	}
 }

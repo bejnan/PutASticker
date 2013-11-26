@@ -37,18 +37,22 @@ public class StickerSchedulingService extends IntentService {
 	private void sendNotification(long id) {
 		mNotificationManager = (NotificationManager) this
 				.getSystemService(Context.NOTIFICATION_SERVICE);
-
+		Sticker sticker = new Sticker(id, getContentResolver());
+		
+		if (sticker.getId() > 0 && !sticker.isEmpty()) {
+			PendingIntent clickIntent = createStickerIntent(id);
+			NotificationCompat.Builder mBuilder = createNotification(sticker, clickIntent);
+			mNotificationManager.notify((int) sticker.getId(), mBuilder.build());
+		}
+	}
+	
+	private PendingIntent createStickerIntent(long id)
+	{
 		Intent newIntent = new Intent(this, SavedStickActivity.class);
 		newIntent.putExtra(Sticker.ID, Long.toString(id));
 		PendingIntent contentIntent = PendingIntent.getActivity(this, (int)id,
 				newIntent, PendingIntent.FLAG_ONE_SHOT);
-
-		Sticker sticker = new Sticker(id, getContentResolver());
-		
-		if (sticker.getId() > 0) {
-			NotificationCompat.Builder mBuilder = createNotification(sticker, contentIntent);
-			mNotificationManager.notify((int) sticker.getId(), mBuilder.build());
-		}
+		return contentIntent;
 	}
 	
 	private NotificationCompat.Builder createNotification(Sticker sticker, PendingIntent newIntent)

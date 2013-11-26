@@ -86,8 +86,7 @@ public class StickerDecideActivity extends Activity {
 	}
 
 	public void deleteMessage(View view) {
-		getContentResolver().delete(Sticker.CONTENT_URI,
-				"_id=" + sticker.getId(), null);
+		sticker.delete(this);
 		setResult(StickerValues.STICKER_DELETED);
 		finish();
 	}
