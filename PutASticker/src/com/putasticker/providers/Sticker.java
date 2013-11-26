@@ -19,7 +19,6 @@ public class Sticker implements BaseColumns {
 	public static final String SUBJECT = "subject";
 	public static final String TEXT = "text";
 	public static final String[] projection = { ID, SUBJECT, TEXT };
-	public static final long NotificationTime = 1000*60*60;
 
 	private long id;
 	private String subject;

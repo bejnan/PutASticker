@@ -31,6 +31,7 @@ public class StickerContentProvider extends ContentProvider {
 	private static final int STICKERS_ID = 2;
 
 	private static class DBHelper extends SQLiteOpenHelper {
+		
 		private static final String CreateQuery = "CREATE TABLE " + StickerTableName
 				+ "(" + Sticker.ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
 				+ Sticker.SUBJECT + " VARCHAR(255)," + Sticker.TEXT
