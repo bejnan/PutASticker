@@ -5,5 +5,7 @@
     <color name="TextBackground">#F5F5DC</color>
     <color name="SavedTextBackground">#EDDBBD</color>
     <color name="NewStickerBackground">#F0F8FF</color>
-
+    <color name="white">#FFFFFF</color>
+	<color name="blue">#0000FF</color>
+	<color name="darkBlue">#000F63</color>
 </resources>

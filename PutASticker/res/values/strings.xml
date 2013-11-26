@@ -8,7 +8,7 @@
     <string name="close_desc">Close sticker</string>
     <string name="title_activity_save_stick">SaveStickActivity</string>
     <string name="title_activity_sticker_list">StickerListActivity</string>
-    <string name="new_sticker_text">Tap to put a new sticker...</string>
+    <string name="new_sticker_text">Tap to put a sticker</string>
     <string name="DecideButton">Decide now</string>
     <string name="title_activity_sticker_decide_activity">StickerDecideActivity</string>
     <string name="facebook">facebook</string>
@@ -19,6 +19,7 @@
     <string name="decision">You have made a decision!</string>
     <string name="passed">and passed further your super idea:</string>
     <string name="back">Go back to sticker</string>
-    <string name="title_activity_push">PushActivity</string>
-
+    <string name="push_message">Hello!\n Your super sticker:\n %s \n is going to peel of</string>
+	<string name="push_button">Take an action</string>
+	<string name="title_activity_push">Take an action</string>
 </resources>

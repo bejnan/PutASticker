@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v4.content.WakefulBroadcastReceiver;
 import android.util.Log;
 
+import com.putasticker.PushActivity;
 import com.putasticker.providers.Sticker;
 
 /**
@@ -36,7 +37,16 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 			Intent service = new Intent(context, StickerSchedulingService.class);
 			service.putExtra(Sticker.ID, id);
 			startWakefulService(context, service);
+			startPushActivity(context, id);
 		}
+	}
+
+	private void startPushActivity(Context context, String stickerId) {
+		Intent pushIntent = new Intent(context, PushActivity.class);
+		pushIntent.putExtra(Sticker.ID, stickerId);
+		pushIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+				| Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+		context.startActivity(pushIntent);
 	}
 
 	public void setAlarm(Context context, long id) {
@@ -47,7 +57,7 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 		alarmIntent = PendingIntent.getBroadcast(context, (int) id, intent,
 				PendingIntent.FLAG_ONE_SHOT);
 
-		alarmMgr.setInexactRepeating(
+		alarmMgr.setRepeating(
 				// To be punctual change to setReapeting
 				AlarmManager.RTC_WAKEUP, getAlarmTime(),
 				AlarmReceiver.REPEAT_INTERVAL, alarmIntent);
@@ -63,11 +73,12 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 	private long getAlarmTime() {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTimeInMillis(System.currentTimeMillis());
-		calendar.add(Calendar.DAY_OF_YEAR, 3);
-		if (calendar.before(Calendar.getInstance())) {
-			calendar.add(Calendar.YEAR, 1);
-		}
-		// calendar.add(Calendar.MINUTE, 1);
+		/*
+		 * calendar.add(Calendar.DAY_OF_YEAR, 3); if
+		 * (calendar.before(Calendar.getInstance())) {
+		 * calendar.add(Calendar.YEAR, 1); }
+		 */
+		calendar.add(Calendar.MINUTE, 1);
 		return calendar.getTimeInMillis();
 	}
 
@@ -76,7 +87,7 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 	 * 
 	 * @param context
 	 */
-	//TODO - develop to cancel alarm by ID
+	// TODO - develop to cancel alarm by ID
 	public void cancelAlarm(Context context) {
 		if (alarmMgr != null) {
 			alarmMgr.cancel(alarmIntent);

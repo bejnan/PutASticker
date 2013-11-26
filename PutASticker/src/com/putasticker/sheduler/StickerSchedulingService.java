@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.putasticker.PushActivity;
 import com.putasticker.R;
 import com.putasticker.SavedStickActivity;
 import com.putasticker.providers.Sticker;

@@ -51,17 +51,22 @@ public class Sticker implements BaseColumns {
 		long id = (textId == null) ? 0 : Long.parseLong(textId);
 		return new Sticker(id,cr);
 	}
-	
+
 	public static Cursor getStickerCursor(ContentResolver cr)
 	{
-		return cr.query(Sticker.CONTENT_URI, Sticker.projection, null, null, "_id ASC");
+		return getStickerCursor(cr, null);
+	}
+	
+	public static Cursor getStickerCursor(ContentResolver cr, String where)
+	{
+		return cr.query(Sticker.CONTENT_URI, Sticker.projection, where, null, "_id ASC");
 	}
 	
 	public Sticker(long id, ContentResolver cr) {
 		super();
 		resolver = cr;
 		if (id > 0) {
-			Cursor c = Sticker.getStickerCursor(resolver);
+			Cursor c = Sticker.getStickerCursor(resolver, Sticker.ID + " = " + id);
 			if (c.moveToFirst()) {
 				subject = c.getString(c.getColumnIndex(SUBJECT));
 				text = c.getString(c.getColumnIndex(TEXT));

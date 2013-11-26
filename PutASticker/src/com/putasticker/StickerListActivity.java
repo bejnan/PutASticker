@@ -1,12 +1,9 @@
 package com.putasticker;
 
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Base64;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;

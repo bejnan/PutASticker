@@ -10,7 +10,7 @@
     tools:context=".SavedStickActivity" >
 
     <FrameLayout
-        android:id="@+id/frameLayout1"
+        android:id="@+id/newStickerLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -28,13 +28,21 @@
             android:text="@string/new_sticker_text"
             android:textColor="@color/background" />
     </FrameLayout>
-
+	<ImageView
+	    android:id="@+id/listSpace"
+	    android:layout_width="fill_parent"
+	    android:layout_height="1pt"
+	    android:layout_marginTop="10dp"
+	    android:background="@color/white"
+	    android:contentDescription="seperator"
+	    android:layout_below="@id/newStickerLayout"
+	    />
     <ListView
         android:id="@+id/stickerListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/frameLayout1" >
+        android:layout_below="@id/listSpace" >
 
     </ListView>
 
