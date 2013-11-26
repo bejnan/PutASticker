@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import com.putasticker.PushActivity;
 import com.putasticker.R;
 import com.putasticker.SavedStickActivity;
 import com.putasticker.providers.Sticker;
@@ -59,7 +58,6 @@ public class StickerSchedulingService extends IntentService {
 				this).setSmallIcon(R.drawable.ic_launcher)
 				.setContentTitle(sticker.getSubject())
 				.setContentText(sticker.getText())
-				.setContentInfo(Long.toString(sticker.getId()))
 				.setContentIntent(newIntent)
 				.setSound(alarmSound);
 		return mBuilder;

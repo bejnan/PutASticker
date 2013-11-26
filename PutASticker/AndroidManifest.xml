@@ -52,7 +52,7 @@
         <activity
             android:name="com.putasticker.PushActivity"
             android:label="@string/title_activity_push"
-            android:theme="@android:style/Theme.Dialog" >
+            android:theme="@android:style/Theme.DeviceDefault.Wallpaper.NoTitleBar" >
         </activity>
 
         <receiver android:name="com.putasticker.sheduler.AlarmReceiver" >

@@ -11,8 +11,10 @@ import com.putasticker.providers.Sticker;
 
 public class SavedStickActivity extends Activity {
 
-	private final int DECIDE = 1;
-
+	public static final int STICKER_DELETED = RESULT_FIRST_USER;
+	
+	private final int SHARE_STICKER = 1;
+	
 	private Sticker sticker;
 	private EditText subject;
 	private EditText text;
@@ -69,13 +71,13 @@ public class SavedStickActivity extends Activity {
 	public void decide(View view) {
 		Intent intent = new Intent(this, StickerDecideActivity.class);
 		intent.putExtra(Sticker.ID, Long.toString(sticker.getId()));
-		startActivityForResult(intent, DECIDE);
+		startActivityForResult(intent, SHARE_STICKER);
 	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		congratulate(resultCode);
-		if (resultCode == RESULT_FIRST_USER) {
+		if (resultCode == STICKER_DELETED) {
 			finish();
 		}
 	}
