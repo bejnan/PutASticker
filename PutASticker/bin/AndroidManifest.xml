@@ -8,20 +8,18 @@
         android:minSdkVersion="16"
         android:targetSdkVersion="18" />
 
-    <uses-permission android:name="android.permission.WAKE_LOCK" >
-    </uses-permission>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" >
-    </uses-permission>
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name="com.putasticker.NewStickerActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:launchMode="singleInstance" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,24 +28,27 @@
         </activity>
         <activity
             android:name="com.putasticker.SavedStickActivity"
-            android:label="@string/title_activity_save_stick" >
+            android:label="@string/title_activity_save_stick"
+            android:launchMode="singleInstance" >
         </activity>
         <activity
             android:name="com.putasticker.StickerListActivity"
-            android:label="@string/title_activity_sticker_list" >
+            android:label="@string/title_activity_sticker_list"
+            android:launchMode="singleInstance" >
         </activity>
 
         <provider
             android:name="com.putasticker.providers.StickerContentProvider"
             android:authorities="com.putasticker.providers.stickercontentprovider" />
-
         <activity
             android:name="com.putasticker.StickerDecideActivity"
-            android:label="@string/title_activity_sticker_decide_activity" >
+            android:label="@string/title_activity_sticker_decide_activity"
+            android:launchMode="singleInstance" >
         </activity>
         <activity
             android:name="com.putasticker.CongratulationActivity"
-            android:label="@string/title_activity_congratulation" >
+            android:label="@string/title_activity_congratulation"
+            android:launchMode="singleInstance" >
         </activity>
         <activity
             android:name="com.putasticker.PushActivity"

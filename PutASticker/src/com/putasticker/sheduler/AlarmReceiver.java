@@ -56,11 +56,14 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 		alarmIntent = PendingIntent.getBroadcast(context, (int) id, intent,
 				PendingIntent.FLAG_ONE_SHOT);
 
-		alarmMgr.setInexactRepeating(
-				// To be punctual change to setReapeting
-				AlarmManager.RTC_WAKEUP, getAlarmTime(),
-				StickerValues.REPEAT_INTERVAL, alarmIntent);
+		if (StickerValues.DEBUG) {
+			alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, getAlarmTime(),
+					StickerValues.REPEAT_INTERVAL, alarmIntent);
 
+		} else {
+			alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP,
+					getAlarmTime(), StickerValues.REPEAT_INTERVAL, alarmIntent);
+		}
 		ComponentName receiver = new ComponentName(context, BootReceiver.class);
 		PackageManager pm = context.getPackageManager();
 
@@ -79,21 +82,20 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 	public void cancelAlarm(Context context, long id) {
 		PendingIntent reCreatedIntent = cancelPendingIntent(context, id);
 		if (reCreatedIntent != null)
-		alarmMgr.cancel(reCreatedIntent);
+			alarmMgr.cancel(reCreatedIntent);
 		cancelAlarmRestoreOnBoot(context);
 	}
-	
-	private PendingIntent cancelPendingIntent(Context context, long id)
-	{
+
+	private PendingIntent cancelPendingIntent(Context context, long id) {
 		Intent intent = new Intent(context, AlarmReceiver.class);
-		PendingIntent recreatedIntend = PendingIntent.getBroadcast(context, (int) id, intent,
-				PendingIntent.FLAG_ONE_SHOT);
-		if (recreatedIntend != null) recreatedIntend.cancel();
+		PendingIntent recreatedIntend = PendingIntent.getBroadcast(context,
+				(int) id, intent, PendingIntent.FLAG_ONE_SHOT);
+		if (recreatedIntend != null)
+			recreatedIntend.cancel();
 		return recreatedIntend;
 	}
-	
-	private void cancelAlarmRestoreOnBoot(Context context)
-	{
+
+	private void cancelAlarmRestoreOnBoot(Context context) {
 		ComponentName receiver = new ComponentName(context, BootReceiver.class);
 		PackageManager pm = context.getPackageManager();
 

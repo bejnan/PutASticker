@@ -11,4 +11,6 @@ public final class StickerValues {
 	
 	public static final int NOTIFY_TIME = 1000 * 60 * 60 * 24 * 3;
 	
+	public static boolean DEBUG = false;
+	
 }

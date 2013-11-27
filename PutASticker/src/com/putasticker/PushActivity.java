@@ -41,6 +41,7 @@ public class PushActivity extends Activity {
 	{
 		Intent intent = new Intent(this, SavedStickActivity.class);
 		intent.putExtra(Sticker.ID, Long.toString(stickerId));
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
 	}
 

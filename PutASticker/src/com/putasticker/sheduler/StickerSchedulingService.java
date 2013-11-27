@@ -3,12 +3,14 @@ package com.putasticker.sheduler;
 import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.view.ViewDebug.FlagToString;
 
 import com.putasticker.R;
 import com.putasticker.SavedStickActivity;
@@ -50,6 +52,7 @@ public class StickerSchedulingService extends IntentService {
 	{
 		Intent newIntent = new Intent(this, SavedStickActivity.class);
 		newIntent.putExtra(Sticker.ID, Long.toString(id));
+		newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		PendingIntent contentIntent = PendingIntent.getActivity(this, (int)id,
 				newIntent, PendingIntent.FLAG_ONE_SHOT);
 		return contentIntent;
